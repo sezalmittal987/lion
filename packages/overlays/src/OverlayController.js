@@ -191,6 +191,7 @@ export class OverlayController {
         this.constructor.popperModule = preloadPopper();
       }
     }
+
     this._handleFeatures({ phase: 'init' });
   }
 
@@ -429,14 +430,14 @@ export class OverlayController {
       case 'init':
         // For global overlays, styles for this are added to head by the OverlayManager
         // For local, we add it locally in DOM here
-        if (this.placementMode === 'local') {
-          const styleTag = document.createElement('style');
-          styleTag.setAttribute('data-local-overlays', '');
-          styleTag.textContent = localOverlaysStyle.cssText;
-          this._contentNodeWrapper.parentElement.insertBefore(styleTag, this._contentNodeWrapper);
-        }
         if (!this.backdropNode) {
           this.__noBackdropNodePassed = true;
+          if (this.placementMode === 'local') {
+            const styleTag = document.createElement('style');
+            styleTag.setAttribute('data-local-overlays', '');
+            styleTag.textContent = localOverlaysStyle.cssText;
+            this._contentNodeWrapper.parentElement.insertBefore(styleTag, this._contentNodeWrapper);
+          }
           this.backdropNode = document.createElement('div');
           this.backdropNode.classList.add(`${this.placementMode}-overlays__backdrop`);
         }

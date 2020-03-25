@@ -585,53 +585,16 @@ Below an example is shown with the `isBlocking` option, which makes use of the O
 </demo-overlay-system>
 ```
 
-
-## Local Backdrop
-
-We provide a possibility to add a backdrop to a locally placed overlay.
-
-<Story name="Local backdrop">
-  {() => html`
-    <demo-overlay-system
-      .config=${{ hasBackdrop: true, placementMode: 'local' }}
-    >
-      <button slot="invoker">Click me to open the overlay!</button>
-      <div slot="content" class="demo-overlay">
-        Hello! You can close this notification here:
-        <button
-          @click=${e => e.target.dispatchEvent(new Event('close-overlay', { bubbles: true }))}
-        >
-          ⨯
-        </button>
-      </div>
-    </demo-overlay-system>
-  `}
-</Story>
-
-```html
-<demo-overlay-system
-  .config=${{ hasBackdrop: true, placementMode: 'local', }}
->
-  <button slot="invoker">Click me to open the overlay!</button>
-  <div slot="content" class="demo-overlay">
-    Hello! You can close this notification here:
-    <button
-      @click=${e => e.target.dispatchEvent(new Event('close-overlay', { bubbles: true }))}
-    >
-      ⨯
-    </button>
-  </div>
-</demo-overlay-system>
-```
-
-### Pass a backdropNode
+## Pass a backdropNode
 
 You can, optionally, pass your own `backdropNode` as a configuration parameter and control its styling and how it responds to OverlayController events.
 Passing your own `backdropNode` will mean you do not get any of the default styling that we provide if you do not pass a node.
 
+This works for both placementMode 'global' and 'local'.
+
 Here is the example below.
 
-<Story name="Passing local backdrop">
+<Story name="Pass a backdropNode">
   {() => {
     let backdropNode = document.createElement('div');
     backdropNode.classList.add('custom-backdrop');
@@ -705,11 +668,11 @@ return html`
 `;
 ```
 
-### Declarative Local Backdrop
+### Declarative backdropNode
 
 Another way to add custom backdrop is declaratively add an element with `slot="backdrop"`.
 
-<Story name="Declarative Local Backdrop">
+<Story name="Declarative backdropNode">
   {() => {
     return html`
     <style>

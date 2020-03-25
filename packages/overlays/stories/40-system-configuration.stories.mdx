@@ -256,7 +256,7 @@ The backdrop animation can be configured by targeting the
 `.global-overlays .global-overlays__backdrop--fade-out` css selector.
 This currently only supports CSS Animations, because it relies on the `animationend` event to add/remove classes.
 
-<Story name="hasBackdrop">
+<Story name="hasBackdrop global">
   {html`
     <demo-overlay-system .config=${{ hasBackdrop: true }}>
       <button slot="invoker">Click me to open the overlay!</button>
@@ -280,6 +280,44 @@ This currently only supports CSS Animations, because it relies on the `animation
     Hello! You can close this notification here:
     <button
       class="close-button"
+      @click=${e => e.target.dispatchEvent(new Event('close-overlay', { bubbles: true }))}
+    >
+      ⨯
+    </button>
+  </div>
+</demo-overlay-system>
+```
+
+### Backdrop for placementMode: local
+
+We provide a possibility to add a backdrop to a locally placed overlay as well.
+
+<Story name="hasBackdrop local">
+  {() => html`
+    <demo-overlay-system
+      .config=${{ hasBackdrop: true, placementMode: 'local' }}
+    >
+      <button slot="invoker">Click me to open the overlay!</button>
+      <div slot="content" class="demo-overlay">
+        Hello! You can close this notification here:
+        <button
+          @click=${e => e.target.dispatchEvent(new Event('close-overlay', { bubbles: true }))}
+        >
+          ⨯
+        </button>
+      </div>
+    </demo-overlay-system>
+  `}
+</Story>
+
+```html
+<demo-overlay-system
+  .config=${{ hasBackdrop: true, placementMode: 'local', }}
+>
+  <button slot="invoker">Click me to open the overlay!</button>
+  <div slot="content" class="demo-overlay">
+    Hello! You can close this notification here:
+    <button
       @click=${e => e.target.dispatchEvent(new Event('close-overlay', { bubbles: true }))}
     >
       ⨯
