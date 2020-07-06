@@ -6,5 +6,5 @@
     "noEmit": false
   },
   // Don't declaration files for core, we hand-type them
-  "exclude": ["packages/core/**/*.js"]
+  "exclude": ["packages/core/**/*Mixin.js"]
 }
