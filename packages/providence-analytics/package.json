@@ -16,7 +16,7 @@
   },
   "files": [
     "dashboard/src",
-    "providence.conf.js"
+    "src"
   ],
   "scripts": {
     "dashboard": "node ./dashboard/src/server.js",
